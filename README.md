@@ -4,8 +4,8 @@ Official golang implementation of the Vnschain protocol.
 
 [![API Reference](
 https://camo.githubusercontent.com/915b7be44ada53c290eb157634330494ebe3e30a/68747470733a2f2f676f646f632e6f72672f6769746875622e636f6d2f676f6c616e672f6764646f3f7374617475732e737667
-)](https://godoc.org/github.com/vnscoin/go-vnscoin)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vnscoin/go-vnscoin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+)]
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)]
 
 Automated builds are available for stable releases and the unstable master branch.
 Binary archives are published at https://github.com/AMTcommunity/go-vnscoin/releases.
@@ -13,7 +13,7 @@ Binary archives are published at https://github.com/AMTcommunity/go-vnscoin/rele
 ## Building the source
 
 For prerequisites and detailed build instructions please read the
-[Installation Instructions](https://github.com/vnscoin/go-vnscoin/wiki/Building-Vnschain)
+[Installation Instructions]
 on the wiki.
 
 Building gvns requires both a Go (version 1.7 or later) and a C compiler.
@@ -32,19 +32,19 @@ The go-vnscoin project comes with several wrappers/executables found in the `cmd
 
 | Command    | Description |
 |:----------:|-------------|
-| **`gvns`** | Our main Vnschain CLI client. It is the entry point into the Vnschain network (main-, test- or private net), capable of running as a full node (default) archive node (retaining all historical state) or a light node (retrieving data live). It can be used by other processes as a gateway into the Vnschain network via JSON RPC endpoints exposed on top of HTTP, WebSocket and/or IPC transports. `gvns --help` and the [CLI Wiki page](https://github.com/vnscoin/go-vnscoin/wiki/Command-Line-Options) for command line options. |
-| `abigen` | Source code generator to convert Vnschain contract definitions into easy to use, compile-time type-safe Go packages. It operates on plain [Vnschain contract ABIs](https://github.com/vnscoin/wiki/wiki/Vnschain-Contract-ABI) with expanded functionality if the contract bytecode is also available. However it also accepts Solidity source files, making development much more streamlined. Please see our [Native DApps](https://github.com/vnscoin/go-vnscoin/wiki/Native-DApps:-Go-bindings-to-Vnschain-contracts) wiki page for details. |
+| **`gvns`** | Our main Vnschain CLI client. It is the entry point into the Vnschain network (main-, test- or private net), capable of running as a full node (default) archive node (retaining all historical state) or a light node (retrieving data live). It can be used by other processes as a gateway into the Vnschain network via JSON RPC endpoints exposed on top of HTTP, WebSocket and/or IPC transports. `gvns --help` and the [CLI Wiki page] for command line options. |
+| `abigen` | Source code generator to convert Vnschain contract definitions into easy to use, compile-time type-safe Go packages. It operates on plain [Vnschain contract ABIs] with expanded functionality if the contract bytecode is also available. However it also accepts Solidity source files, making development much more streamlined. Please see our [Native DApps] wiki page for details. |
 | `bootnode` | Stripped down version of our Vnschain client implementation that only takes part in the network node discovery protocol, but does not run any of the higher level application protocols. It can be used as a lightweight bootstrap node to aid in finding peers in private networks. |
 | `evm` | Developer utility version of the EVM (Vnschain Virtual Machine) that is capable of running bytecode snippets within a configurable environment and execution mode. Its purpose is to allow isolated, fine-grained debugging of EVM opcodes (e.g. `evm --code 60ff60ff --debug`). |
-| `gvnsrpctest` | Developer utility tool to support our [vnscoin/rpc-test](https://github.com/vnscoin/rpc-tests) test suite which validates baseline conformity to the [Vnschain JSON RPC](https://github.com/vnscoin/wiki/wiki/JSON-RPC) specs. Please see the [test suite's readme](https://github.com/vnscoin/rpc-tests/blob/master/README.md) for details. |
-| `rlpdump` | Developer utility tool to convert binary RLP ([Recursive Length Prefix](https://github.com/vnscoin/wiki/wiki/RLP)) dumps (data encoding used by the Vnschain protocol both network as well as consensus wise) to user friendlier hierarchical representation (e.g. `rlpdump --hex CE0183FFFFFFC4C304050583616263`). |
+| `gvnsrpctest` | Developer utility tool to support our [vnscoin/rpc-test] test suite which validates baseline conformity to the [Vnschain JSON RPC] specs. Please see the [test suite's readme] for details. |
+| `rlpdump` | Developer utility tool to convert binary RLP ([Recursive Length Prefix]) dumps (data encoding used by the Vnschain protocol both network as well as consensus wise) to user friendlier hierarchical representation (e.g. `rlpdump --hex CE0183FFFFFFC4C304050583616263`). |
 | `swarm`    | swarm daemon and tools. This is the entrypoint for the swarm network. `swarm --help` for command line options and subcommands. See https://swarm-guide.readthedocs.io for swarm documentation. |
 | `puppvns`    | a CLI wizard that aids in creating a new Vnschain network. |
 
 ## Running gvns
 
 Going through all the possible command line flags is out of scope here (please consult our
-[CLI Wiki page](https://github.com/vnscoin/go-vnscoin/wiki/Command-Line-Options)), but we've
+[CLI Wiki page]), but we've
 enumerated a few common parameter combos to get you up to speed quickly on how you can run your
 own Gvns instance.
 
@@ -66,9 +66,9 @@ This command will:
  * Bump the memory allowance of the database to 512MB (`--cache=512`), which can help significantly in
    sync times especially for HDD users. This flag is optional and you can set it as high or as low as
    you'd like, though we'd recommend the 512MB - 2GB range.
- * Start up Gvns's built-in interactive [JavaScript console](https://github.com/vnscoin/go-vnscoin/wiki/JavaScript-Console),
-   (via the trailing `console` subcommand) through which you can invoke all official [`web3` methods](https://github.com/vnscoin/wiki/wiki/JavaScript-API)
-   as well as Gvns's own [management APIs](https://github.com/vnscoin/go-vnscoin/wiki/Management-APIs).
+ * Start up Gvns's built-in interactive [JavaScript console],
+   (via the trailing `console` subcommand) through which you can invoke all official [`web3` methods]
+   as well as Gvns's own [management APIs].
    This too is optional and if you leave it out you can always attach to an already running Gvns instance
    with `gvns attach`.
 
@@ -136,8 +136,8 @@ Do not forget `--rpcaddr 0.0.0.0`, if you want to access RPC from other containe
 
 As a developer, sooner rather than later you'll want to start interacting with Gvns and the Vnschain
 network via your own programs and not manually through the console. To aid this, Gvns has built in
-support for a JSON-RPC based APIs ([standard APIs](https://github.com/vnscoin/wiki/wiki/JSON-RPC) and
-[Gvns specific APIs](https://github.com/vnscoin/go-vnscoin/wiki/Management-APIs)). These can be
+support for a JSON-RPC based APIs ([standard APIs]and
+[Gvns specific APIs]). These can be
 exposed via HTTP, WebSockets and IPC (unix sockets on unix based platforms, and named pipes on Windows).
 
 The IPC interface is enabled by default and exposes all the APIs supported by Gvns, whereas the HTTP
@@ -229,7 +229,7 @@ $ bootnode --genkey=boot.key
 $ bootnode --nodekey=boot.key
 ```
 
-With the bootnode online, it will display an [`enode` URL](https://github.com/vnscoin/wiki/wiki/enode-url-format)
+With the bootnode online, it will display an [`enode` URL]
 that other nodes can use to connect to it and exchange peer information. Make sure to replace the
 displayed IP address information (most probably `[::]`) with your externally accessible IP to get the
 actual `enode` URL.
@@ -277,7 +277,7 @@ anyone on the internet, and are grateful for even the smallest of fixes!
 
 If you'd like to contribute to go-vnscoin, please fork, fix, commit and send a pull request
 for the maintainers to review and merge into the main code base. If you wish to submit more
-complex changes though, please check up with the core devs first on [our gitter channel](https://gitter.im/vnscoin/go-vnscoin)
+complex changes though, please check up with the core devs first on [our gitter channel]
 to ensure those changes are in line with the general philosophy of the project and/or get some
 early feedback which can make both your efforts much lighter as well as our review and merge
 procedures quick and simple.
@@ -290,7 +290,7 @@ Please make sure your contributions adhere to our coding guidelines:
  * Commit messages should be prefixed with the package(s) they modify.
    * E.g. "vns, rpc: make trace configs optional"
 
-Please see the [Developers' Guide](https://github.com/vnscoin/go-vnscoin/wiki/Developers'-Guide)
+Please see the [Developers' Guide]
 for more details on configuring your environment, managing project dependencies and testing procedures.
 
 ## License
