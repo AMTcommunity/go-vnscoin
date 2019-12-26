@@ -144,6 +144,7 @@ The IPC interface is enabled by default and exposes all the APIs supported by Gv
 and WS interfaces need to manually be enabled and only expose a subset of APIs due to security reasons.
 These can be turned on/off and configured as you'd expect.
 
+### HTTP Server
 HTTP based JSON-RPC API options:
 
   * `--rpc` Enable the HTTP-RPC server
@@ -160,9 +161,45 @@ HTTP based JSON-RPC API options:
   * `--ipcapi` API's offered over the IPC-RPC interface (default: "admin,debug,vns,miner,net,personal,shh,txpool,web3")
   * `--ipcpath` Filename for IPC socket/pipe within the datadir (explicit paths escape it)
 
+You can start the HTTP JSON-RPC with the `--rpc` flag
+```
+gvns --rpc
+```
+change the default port (8585) and listing address (localhost) with:
+```
+gvns --rpc --rpcaddr <ip> --rpcport <portnumber>
+```
+
+JSON-RPC method namespaces must be whitelisted in order to be available through the HTTP server. The default whitelist allows access to the “vns” and “shh” namespaces. To enable access to other APIs like account management (“personal”) and debugging (“debug”), they must be configured via the `--rpcapi` flag. We do not recommend enabling such APIs over HTTP, however, since access to these methods increases the attack surface.
+```
+gvns --rpc --rpcapi "personal,vns,net,web3"
+```
+
+If accessing the RPC from a browser, CORS will need to be enabled with the appropriate domain set. Otherwise, JavaScript calls are limit by the same-origin policy and requests will fail:
+```
+gvns --rpc --rpccorsdomain "http://127.0.0.1:8080"
+```
+Use `--rpccorsdomain '*'` to enable access from any origin.
+
 You'll need to use your own programming environments' capabilities (libraries, tools, etc) to connect
 via HTTP, WS or IPC to a Gvns node configured with the above flags and you'll need to speak [JSON-RPC](http://www.jsonrpc.org/specification)
 on all transports. You can reuse the same connection for multiple requests!
+
+### WebSocket Server
+Configuration of the WebSocket endpoint is similar to the HTTP transport. To enable WebSocket access, use `--ws` flag. The default WebSocket port is 8546. The `--wsaddr`, `--wsport` and `--wsapi` flags can be used to customize settings for the WebSocket server.
+```
+gvns --ws --wsport 8888 --wsapi vns,net,web3
+```
+Cross-Origin request protection also applies to the WebSocket server. Use the `--wsorigins` flag to allow access to the server from web pages:
+```
+gvns --ws --wsorigins http://myudapp.example.com
+```
+As with `--rpccorsdomain`, using `--wsorigins '*'` allows access from any origin.
+
+### IPC Server
+JSON-RPC APIs are also provided on a UNIX domain socket. This server is enabled by default and has access to all JSON-RPC namespaces.
+The listening socket is placed into the data directory by default. On Linux, the default location of the gvns socket is `~/.vnscoin/gvns.ipc`
+You can configure the location of the socket using the `--ipcpath` flag. IPC can be disabled using the `--ipcdisable` flag.
 
 **Note: Please understand the security implications of opening up an HTTP/WS based transport before
 doing so! Hackers on the internet are actively trying to subvert Vnschain nodes with exposed APIs!
